@@ -1,4 +1,4 @@
-# Example 14. Page 53.
+# Cracking the coding interview. Example 14. Page 53.
 
 def allFib(n: int):
     for i in range(0, n):

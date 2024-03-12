@@ -1,4 +1,4 @@
-# Example 15. Page 53.
+# Cracking the coding interview. Example 15. Page 53.
 
 def allFib(n: int):
     memo = [0 for i in range(0, n)]
