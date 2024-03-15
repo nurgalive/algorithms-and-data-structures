@@ -11,6 +11,12 @@ def get_count(arr, size):
         return 1
     else:
         return 1 + get_count(arr, size - 1)
+    
+# solution from the book
+def count2(list):
+    if list == []:
+        return 0
+    return 1 + count2(list[1:])
 
 test = [2, 4, 6]
 print(count(test))
