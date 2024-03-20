@@ -23,7 +23,7 @@ def is_unique(string: str) -> bool:
     return True
 
 # Improved solution using hints
-# Time complexity - O(n). 
+# Time complexity - O(n), 
 # Or O(c), where c - is the character set (all possible characters)
 # Space complexity O(1) - constant to store all possible characters
 def is_unique2(string: str) -> bool:
