@@ -18,7 +18,7 @@ def timeit(some_function):
 # ver 1. My naive implementation
 @timeit
 def get_prime_numbers1(size: int) -> list[int]: # Test, so pylint: disable=missing-function-docstring
-    arr = [i for i in range(1, size + 1)]
+    arr = [i for i in range(2, size + 2)]
 
     for i in range(1, len(arr)): # Algo depends on indexes, so pylint: disable=consider-using-enumerate
         # print(f"Id: {i}")
