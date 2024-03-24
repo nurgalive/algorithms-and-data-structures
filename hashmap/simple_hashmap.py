@@ -1,3 +1,6 @@
+# Based on Grokking algorithms: page 93-D
+
+
 from string import ascii_lowercase
 
 
@@ -39,10 +42,11 @@ def get_random_words(number_of_random_words: int) -> list[str]:
 # TODO:
 # 1. What happends, if there is already a value in the index?
 # 2. What if we need to grow the array?
+# 3. Make it work with any character: from string import printable and convert to string (int, float)
 class Hashmap:
     letter_dict = dict(zip(ascii_lowercase, get_prime_numbers1(26)))
     def __init__(self):
-        self.array = [0 for i in range(10)]  # initial size 10
+        self.array = [None for i in range(10)]  # initial size 10
         print("Created hashmap with size:", len(self.array))
 
     def calculate_index(self, key):
