@@ -1,32 +1,11 @@
 # Based on Grokking algorithms: page 93-D
 
+import sys
+from pathlib import Path
+sys.path.append(str(Path(sys.argv[0]).resolve().parent.parent))
 
+from services.prime import get_prime_numbers1
 from string import ascii_lowercase
-
-
-def get_prime_numbers1(
-    size: int,
-) -> list[int]:  # Test, so pylint: disable=missing-function-docstring
-    arr = [i for i in range(2, size + 2)]
-
-    for i in range(
-        1, len(arr)
-    ):  # Algo depends on indexes, so pylint: disable=consider-using-enumerate
-        # print(f"Id: {i}")
-        start = arr[i - 1] + 1
-        while True:  # until we find the prime number
-            # print(f"Start: {start}")
-            dividers = []
-            for guess in range(2, start + 1):  # second value exclusive
-                if start % guess == 0:
-                    dividers.append(guess)
-            if dividers == [start]:
-                arr[i] = start
-                # print(arr)
-                break
-            start += 1
-    # print(arr[-1])
-    return arr
 
 def get_random_words(number_of_random_words: int) -> list[str]:
     import random

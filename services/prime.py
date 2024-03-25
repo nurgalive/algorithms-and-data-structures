@@ -16,7 +16,7 @@ def timeit(some_function):
     return wrapper
 
 # ver 1. My naive implementation
-@timeit
+# @timeit
 def get_prime_numbers1(size: int) -> list[int]: # Test, so pylint: disable=missing-function-docstring
     arr = [i for i in range(2, size + 2)]
 
@@ -34,7 +34,7 @@ def get_prime_numbers1(size: int) -> list[int]: # Test, so pylint: disable=missi
                 # print(arr)
                 break
             start += 1
-    print(arr[-1])
+    # print(arr[-1])
     return arr
 
 # ver 2. Influenced by the doc example
@@ -73,23 +73,24 @@ def get_prime_numbers3(size: int) -> list[int]: # Test, so pylint: disable=missi
             # print(arr)
     return arr
 
-# from the doc https://docs.python.org/3/tutorial/controlflow.html#break-and-continue-statements-and-else-clauses-on-loops
-# example of using else in loops
-@timeit
-def get_prime_numbers4(size: int) -> list[int]:
-    res = []
-    for n in range(2, size):
-        for x in range(2, n):
-            if n % x == 0:
-                # print(n, 'equals', x, '*', n//x)
-                break
-        else:
-            # loop fell through without finding a factor
-            # print(n, 'is a prime number')
-            res.append(n)
-    return res
+if __name__ == "__main__":
+    # from the doc https://docs.python.org/3/tutorial/controlflow.html#break-and-continue-statements-and-else-clauses-on-loops
+    # example of using else in loops
+    @timeit
+    def get_prime_numbers4(size: int) -> list[int]:
+        res = []
+        for n in range(2, size):
+            for x in range(2, n):
+                if n % x == 0:
+                    # print(n, 'equals', x, '*', n//x)
+                    break
+            else:
+                # loop fell through without finding a factor
+                # print(n, 'is a prime number')
+                res.append(n)
+        return res
 
-print(len(get_prime_numbers1(1000)))
-print(len(get_prime_numbers2(7910)))
-print(len(get_prime_numbers3(7910)))
-print(len(get_prime_numbers4(7910)))
+    print(len(get_prime_numbers1(1000)))
+    print(len(get_prime_numbers2(7910)))
+    print(len(get_prime_numbers3(7910)))
+    print(len(get_prime_numbers4(7910)))
