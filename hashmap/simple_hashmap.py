@@ -20,7 +20,7 @@ def get_random_words(number_of_random_words: int) -> list[str]:
     print("Random  words:", random_words)
     return random_words
 
-# 1. What happends, if there is already a value in the index? -> Collision resolution
+# 1. What happens, if there is already a value in the index? -> Collision resolution
 # 2. What if we need to grow the array? -> load factor and resizing
 # 3. Make it work with any character: from string import printable and convert to string (int, float)
 class Hashmap:
