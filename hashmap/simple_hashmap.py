@@ -4,14 +4,17 @@
 
 import sys
 from pathlib import Path
+
 sys.path.append(str(Path(sys.argv[0]).resolve().parent.parent))
 
 from string import ascii_lowercase
 from services.prime import get_prime_numbers1
 
+
 def get_random_words(number_of_random_words: int) -> list[str]:
     import random
     import requests
+
     WORD_SITE = "https://www.mit.edu/~ecprice/wordlist.10000"
     response = requests.get(WORD_SITE)
     WORDS = response.content.decode("utf-8").splitlines()
@@ -20,11 +23,13 @@ def get_random_words(number_of_random_words: int) -> list[str]:
     print("Random  words:", random_words)
     return random_words
 
+
 # 1. What happens, if there is already a value in the index? -> Collision resolution
 # 2. What if we need to grow the array? -> load factor and resizing
 # 3. Make it work with any character: from string import printable and convert to string (int, float)
 class Hashmap:
     letter_dict = dict(zip(ascii_lowercase, get_prime_numbers1(26)))
+
     def __init__(self):
         self.array = [None for i in range(10)]  # initial size 10
         print("Created hashmap with size:", len(self.array))
@@ -36,7 +41,7 @@ class Hashmap:
         letter_sum = 0
         for letter in key:
             letter_sum += self.letter_dict[letter]
-        
+
         index = letter_sum % 10 - 1  # -1 since the array has 0-based indexing
         print("Calculated index:", index, "; for the key:", key)
         return index
@@ -51,17 +56,18 @@ class Hashmap:
         if value:
             return value
         raise KeyError(key)
-    
+
     def load_factor(self):
         pass
 
     def resize(self):
-        pass    
+        pass
+
 
 hashmap = Hashmap()
 val_iterartor = 1
 # random_words = get_random_words(3)
-random_words = ['withdrawal', 'registration', 'guidelines']
+random_words = ["withdrawal", "registration", "guidelines"]
 for word in random_words:
     hashmap.put(word, val_iterartor)
     val_iterartor += 1
@@ -81,6 +87,3 @@ hashmap.get("aaa")
 
 # res = w_sum % 10
 # print(res)
-
-
-
