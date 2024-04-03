@@ -43,6 +43,16 @@ class LinkedList:
             yield node
             node = node.next
 
+    def __len__(self) -> int:
+        if self.head is None:
+            return 0
+        
+        count = 0
+        for _ in self:
+            count += 1
+        
+        return count
+
     def add_first(self, node: Node) -> None:
         """
         This method is the advantage of the linked list.
@@ -136,8 +146,14 @@ class LinkedList:
             count += 1
         
         raise IndexError(index)
-        
-        
+    
+    def reverse(self):
+        new_list = LinkedList()
+        temp_arr = [node for node in self]
+        for i in temp_arr:
+            new_list.add_first(i.data)
+        self = new_list
+        return self
 
 if __name__ == "__main__":
     # llist = LinkedList()
@@ -203,13 +219,22 @@ if __name__ == "__main__":
     # LinkedList().remove_node("a")  # IndexError: List is empty
 
     # delete in the beginning
-    llist = LinkedList(["a", "b", "c"])
-    print("llist before", llist)
-    llist.remove_node("a")
-    print("llist after:", llist)
+    # llist = LinkedList(["a", "b", "c"])
+    # print("llist before", llist)
+    # llist.remove_node("a")
+    # print("llist after:", llist)
 
-    # delete in the middle
+    # # delete in the middle
+    # llist = LinkedList(["a", "b", "c"])
+    # print("llist before", llist)
+    # llist.remove_node("b")
+    # print("llist after:", llist)
+
+    ## getting item by index
+    # llist = LinkedList(["a", "b", "c"])
+    # print(llist[3])
+
+    ## reversing the linked list
     llist = LinkedList(["a", "b", "c"])
-    print("llist before", llist)
-    llist.remove_node("b")
-    print("llist after:", llist)
+    print(llist.reverse())
+    
