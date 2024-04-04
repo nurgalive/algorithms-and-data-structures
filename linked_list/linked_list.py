@@ -147,13 +147,12 @@ class LinkedList:
         
         raise IndexError(index)
     
-    def reverse(self):
+    def reverse(self) -> None:
         new_list = LinkedList()
         temp_arr = [node for node in self]
         for i in temp_arr:
             new_list.add_first(i.data)
-        self = new_list
-        return self
+        self.head = new_list.head
 
 if __name__ == "__main__":
     # llist = LinkedList()
@@ -236,5 +235,6 @@ if __name__ == "__main__":
 
     ## reversing the linked list
     llist = LinkedList(["a", "b", "c"])
-    print(llist.reverse())
+    llist.reverse()
+    print(llist)
     
