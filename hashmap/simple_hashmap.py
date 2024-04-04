@@ -23,20 +23,63 @@ def get_random_words(number_of_random_words: int) -> list[str]:
     print("Random  words:", random_words)
     return random_words
 
+### TODO: Implement simple single-linked linked list here
+# def add_first
+# def find
+# def delete
 
-# 1. What happens, if there is already a value in the index? -> Collision resolution
-# 2. What if we need to grow the array? -> load factor and resizing
-# 3. Make it work with any character: from string import printable and convert to string (int, float)
-class Hashmap:
-    letter_dict = dict(zip(ascii_lowercase, get_prime_numbers1(26)))
+class LinkedList():
+    """
+    Simple single-linked linked list.
+    """
+    class Node:
+        """
+        Node class which stores data.
+        """
+        def __init__(self, data: int):
+            self.data = data
+            self.next = None
 
     def __init__(self):
-        self.array = [None for i in range(10)]  # initial size 10
+        self.head = None
+    
+    def add_first(self, data):
+        old_head = self.head
+        self.head = self.Node(data)
+        self.head.next = old_head
+    
+    def __repr__(self):
+        node = self.head
+        nodes = []
+        while node is not None:
+            nodes.append(node.data)
+            node = node.next
+        nodes.append("None")
+        return " -> ".join(nodes)
+
+# 1. What happens, if there is already a value in the index? -> Collision resolution. Store values as linked list pairs
+# 2. What if we need to grow the array? -> calculate load factor and resizing
+# 3. Make it work with any character: from string import printable and convert to string (int, float)
+# 4. Add tests for distribution of the index function
+class Hashmap:
+    """
+    Simple hash map. As a hash function used sum of the prime numbers.
+    Where each prime number calculated based on the position of the letter.
+    a - has first prime number, b - second, z - 26th prime number.
+    """
+    letter_dict = dict(zip(ascii_lowercase, get_prime_numbers1(26)))
+
+    def __init__(self, size):
+        self.array = [None for i in range(size)]  # initial size 10
         print("Created hashmap with size:", len(self.array))
+    def __len__(self):
+        return len(self.array)
 
     def calculate_index(self, key) -> int:
         """
-        My homebrewed hash code calucalation.
+        My homebrew hash code calculation based on prime number.
+        Every letter has own prime number, calculated by the get_prime_numbers(26) function.
+        26 - is the amount of the lowercase letters.
         """
         letter_sum = 0
         for letter in key:
@@ -47,7 +90,16 @@ class Hashmap:
         return index
 
     def put(self, key: str, val: int) -> None:
-        self.array[self.calculate_index(key)] = val
+        """
+        Store keys and values in 
+        """
+        index = self.calculate_index(key)
+        if self.array[index]:
+            self.array[index].add_first((key, val))
+        else:
+            self.array[index] = LinkedList()
+            self.array[index].add_first((key, val))
+        
         print("Put value:", val, "; for the key:", key)
         print("Data array:", self.array)
 
@@ -64,18 +116,18 @@ class Hashmap:
         pass
 
 
-hashmap = Hashmap()
-val_iterartor = 1
-# random_words = get_random_words(3)
-random_words = ["withdrawal", "registration", "guidelines"]
-for word in random_words:
-    hashmap.put(word, val_iterartor)
-    val_iterartor += 1
+# hashmap = Hashmap(10)
+# val_iterator = 1
+# # random_words = get_random_words(3)
+# random_words = ["withdrawal", "registration", "guidelines"]
+# for word in random_words:
+#     hashmap.put(word, val_iterator)
+#     val_iterator += 1
 
-for word in random_words:
-    print("For word:", word, "we got value:", hashmap.get(word))
+# for word in random_words:
+#     print("For word:", word, "we got value:", hashmap.get(word))
 
-hashmap.get("aaa")
+# hashmap.get("aaa")
 
 ### testing
 # letter_dict = dict(zip(ascii_lowercase, get_prime_numbers1(26)))
@@ -87,3 +139,9 @@ hashmap.get("aaa")
 
 # res = w_sum % 10
 # print(res)
+
+llist = LinkedList()
+llist.add_first("a")
+llist.add_first("b")
+llist.add_first("c")
+print(llist)
