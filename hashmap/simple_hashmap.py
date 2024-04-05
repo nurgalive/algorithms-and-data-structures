@@ -107,7 +107,7 @@ class Hashmap:
             letter_sum += self.letter_dict[letter]
 
         index = letter_sum % self.size  # -1 since the array has 0-based indexing
-        print("Calculated index:", index, "; for the key:", key)
+        # print("Calculated index:", index, "; for the key:", key)
         return index
 
     def put(self, key: str, val: int) -> None:
