@@ -2,6 +2,9 @@
 # Check Permutation: Given two strings, write a method to decide 
 # if one is a permutation of the other.
 
+# Check also
+# https://github.com/TheAlgorithms/Python/blob/master/strings/check_anagrams.py
+
 # Hints:
 #1. 1.2 Describe what it means for two strings to be permutations of each other. Now, look at
 #that definition you provided. Can you check the strings against that definition?
@@ -19,29 +22,18 @@
 # str2 = "bca"
 
 # duplicates case
-str1 = "babb"
-str2 = "abaa"
+str1 = "baab"
+str2 = "abab"
 
-
-# brute force solution
-# O(N^2)
-def check_permutation1(str1: str, str2: str) -> bool: # does not work with duplicates
-	for s1 in str1:
-		for s2 in str2:
-			if s1 == s2:
-				break
-		else:
-			return False
-	return True
 
 # Hacky solution using hashmap
 # O(S1 + S2)
-def check_permutation2(str1: str, str2: str) -> bool:
+def check_permutation1(str1: str, str2: str) -> bool:
 	if len(str1) != len(str2): # O(1)
 		return False
 	# not a set, because set is immutable
 	str1_dict = {s: 0 for s in str1}  # Creating a dict from the string: O(S1)
-	print(str1_dict)
+	# print(str1_dict)
 
 	for s in str2: # Iterating over S2: O(S2)
 		if s not in str1_dict:
@@ -54,14 +46,18 @@ def check_permutation2(str1: str, str2: str) -> bool:
 		return False
 
 # using sorting
-def check_permutation3(str1: str, str2: str) -> bool:
+def check_permutation2(str1: str, str2: str) -> bool:
+	"""
+	>>> check_permutation3("aba", "aab")
+	True
+	"""
 	if len(str1) != len(str2):
 		return False
 	
 	return sorted(str1) == sorted(str2) # O(s1 log s1 + s2 log s2)
 
 # using counting frequencies
-def check_permutation4(str1: str, str2: str) -> bool:
+def check_permutation3(str1: str, str2: str) -> bool:
 	letters = [0 for i in range(128)]
 
 	for s in str1:  # O(S1)
@@ -74,5 +70,27 @@ def check_permutation4(str1: str, str2: str) -> bool:
 			return False
 	
 	return True
-	
-print(check_permutation4(str1, str2))
+
+
+import unittest
+
+class TestCheckPermutation(unittest.TestCase):
+	input_data = [
+		("aaa", "aaa", True),
+		("bab", "abb", True),
+        ("aaa", "aab", False),
+        ("aaa", "bbb", False),
+        # (2, 4),
+        # (10, 0)
+    ]
+
+	def test_function1(self):
+		for str1, str2, result in self.input_data:
+			with self.subTest(input_data=(str1, str2)):
+				self.assertEqual(check_permutation1(str1, str2), result)
+				self.assertEqual(check_permutation2(str1, str2), result)
+				self.assertEqual(check_permutation3(str1, str2), result)
+
+
+if __name__ == "__main__":
+	unittest.main()

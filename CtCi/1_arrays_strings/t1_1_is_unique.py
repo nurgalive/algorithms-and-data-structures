@@ -10,9 +10,12 @@
 # Is it ASCII (128) or Unicode string?
 # Create 128 array
 
-# brute force solution
-# time complexity - O(n^2)
+
 def is_unique(string: str) -> bool:
+    """
+    Brute force solution.
+    Time complexity - O(n^2)
+    """
     for i in string:
         counter = 0
         for j in string:
