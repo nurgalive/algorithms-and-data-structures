@@ -1,5 +1,6 @@
 // Example from the book
 
+// True length used to count actual amount of spaces
 
 package q1_03_urlify;
 public class urlify {
@@ -15,8 +16,9 @@ public class urlify {
     }
     
     index = trueLength + spaceCount * 2; // it is done, so because we are replacing a space with %20, so 2 extra characters are needed for every space
+
     // Ensure the array has enough space
-    if (trueLength < str.length) str[trueLength] = '\0';
+    if (trueLength < str.length) str[trueLength] = '\0'; // adds a separator, where the actual string ends
     
     for (i = trueLength - 1; i >= 0; i--) {
       if (str[i] == ' ') {
