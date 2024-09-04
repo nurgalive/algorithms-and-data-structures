@@ -27,6 +27,13 @@ And the input array (char) size is 17, because for every existing space characte
 two more spaces are added. It means, that the string has two spaces, which equals to 6 spaces required, 
 in order to replace spaces with '%20' and have enough space.
 
+More solutions:
+https://codereview.stackexchange.com/questions/141281/urlify-a-string-using-python
+https://codereview.stackexchange.com/questions/141391/urlify-a-character-array-using-python-follow-up
+
+Commentators in those links point out, that it is not possible to comply with the O(1) requirement,
+since in python we have to make a copy of the string. Strings in python are immutable.
+
 """
 
 # my naive solution
@@ -105,9 +112,6 @@ def urlify3(string: str, true_length: int) -> str:
     return "".join(string1)
 
 
-    
-
-
 # def urlify4(string: str, length: int) -> str:
 #     string1 = list(string) # ?
 #     result = [0 for i in range(length)]
@@ -118,4 +122,5 @@ def urlify3(string: str, true_length: int) -> str:
 
 if __name__ == "__main__":
     print(urlify3("Mr John Smith    ", 13))
+    # Expected output: 
     # Mr%20John%20Smith
