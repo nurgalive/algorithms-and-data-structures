@@ -1,4 +1,5 @@
 // Example from the book
+// https://github.com/careercup/CtCI-6th-Edition/blob/master/Java/Ch%2001.%20Arrays%20and%20Strings/Q1_03_URLify/Question.java
 
 // True length used to count actual amount of spaces
 
