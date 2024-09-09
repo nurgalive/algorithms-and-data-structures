@@ -73,23 +73,23 @@ def get_prime_numbers3(size: int) -> list[int]: # Test, so pylint: disable=missi
             # print(arr)
     return arr
 
-if __name__ == "__main__":
-    # from the doc https://docs.python.org/3/tutorial/controlflow.html#break-and-continue-statements-and-else-clauses-on-loops
-    # example of using else in loops
-    @timeit
-    def get_prime_numbers4(size: int) -> list[int]:
-        res = []
-        for n in range(2, size):
-            for x in range(2, n):
-                if n % x == 0:
-                    # print(n, 'equals', x, '*', n//x)
-                    break
-            else:
-                # loop fell through without finding a factor
-                # print(n, 'is a prime number')
-                res.append(n)
-        return res
+# from the doc https://docs.python.org/3/tutorial/controlflow.html#break-and-continue-statements-and-else-clauses-on-loops
+# example of using else in loops
+@timeit
+def get_prime_numbers4(size: int) -> list[int]:
+    res = []
+    for n in range(2, size):
+        for x in range(2, n):
+            if n % x == 0:
+                # print(n, 'equals', x, '*', n//x)
+                break
+        else:
+            # loop fell through without finding a factor
+            # print(n, 'is a prime number')
+            res.append(n)
+    return res
 
+if __name__ == "__main__":
     print(len(get_prime_numbers1(1000)))
     print(len(get_prime_numbers2(7910)))
     print(len(get_prime_numbers3(7910)))
