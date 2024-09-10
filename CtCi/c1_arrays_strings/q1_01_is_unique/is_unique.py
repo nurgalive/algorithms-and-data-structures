@@ -36,19 +36,22 @@ def is_unique1(string: str) -> bool:
 def is_unique2(string: str) -> bool:
     """
     Improved solution using hints.
-    The max size of the string == number of character, which is 128.
+    The max size of the string == number of character, which is 128. Since 
+    ASCII has only 128 symbols (code points).
     Counts the frequencies for the every character of the string.
     If the count exceeds 1, it has duplicated characters.
     If has only count up to 1, all values are unique.
+    Uses ord() function, which returns the code point for the character. Works
+    like a hash map.
     Time complexity - O(n),
     Or O(c), where c - is the character set (all possible characters)
     Space complexity O(1) - constant to store all possible characters
     """
-    if len(string) > 128:
+    if len(string) > 128:  # if lengths more than 128, means that there are duplicates
         return False
-    arr = [0 for _ in range(0, 129)]
+    arr = [0 for _ in range(0, 129)]  # create empty array
     for s in string:
-        if arr[ord(s)] == 1:
+        if arr[ord(s)] == 1:  # using 'ord()' find the location for the letter 's'
             return False
         else:
             arr[ord(s)] = 1
@@ -66,17 +69,17 @@ def is_unique3(string: str) -> bool:
 
     # string = string.lower()  # this functions only works with the lowercase
 
-    checker = 0  # initial values, which is 32 zeros
+    checker = 0  # initial integer value, which is 32 zeros
 
     for s in string:
         # we substract 'a' as a smallest number from other characters
         #        val        const
         val = ord(s) - ord("a")  # we get the bit value for the character
         # print(f"val    : {val:032b}")  # uncomment this for the content
-        # bitwise read operations
-        if (
-            checker & (1 << val) > 0
-        ):  # here we read the bit value, and check if it is equal to 1
+        
+        if (  # bitwise read operation
+            checker & (1 << val) > 0  # here we read the bit value, and check if it is bigger than zero
+        ):  
             return False  # return false, if equals to zero
             # bitwise write operation
         checker = checker | (1 << val)  # set the values to 1, if not
