@@ -25,6 +25,12 @@ Only edits
 - pale, pales
 - pale, palse
 
+Solution from the author:
+https://github.com/careercup/CtCI-6th-Edition/tree/master/Java/Ch%2001.%20Arrays%20and%20Strings/Q1_05_One_Away
+
+Python solution:
+https://github.com/careercup/CtCI-6th-Edition-Python/blob/master/chapter_01/p05_one_away.py
+
 """
 
 import unittest
@@ -32,25 +38,15 @@ import unittest
 def one_way_simple(str1: str, str2) -> bool:
     """
     My brute force solution.
-    O(s^2) - for every char do a loop.
+    O(s^2) - for every char in the str1 do a loop over str2.
     """
 
-    longest_len = 0
-    long_str = None
-    short_str = None
-    if len(str1) > len(str2): 
-        longest_len = len(str1)
-        long_str = str1
-        short_str = str2
-    else: 
-        longest_len = len(str2)
-        long_str = str2
-        short_str = str1
+    long_str = str1 if len(str1) > len(str2) else str2
+    short_str = str1 if len(str1) < len(str2) else str2 
     
     if len(long_str) - len(short_str) > 1:
         return False
 
-    result = False
     diff_count = 0
     for s in long_str:
         if not find_char(short_str, s):
@@ -116,37 +112,77 @@ def check_insert_remove(str1: str, str2: str):
             id2 += 1
     return True
 
+def one_way_unified(str1: str, str2: str) -> bool:
+    long_str = str1 if len(str1) > len(str2) else str2
+    short_str = str1 if len(str1) < len(str2) else str2
+
+    found_diff = False
+    id1 = 0
+    id2 = 0
+    while id1 < len(long_str) and id2 < len(short_str):
+        if str1[id1] != str2[id2]:
+            if found_diff:
+                return False
+            found_diff = True
+
+            if len(str1) == len(str2): # strings the same size - replace case
+                id1 += 1  # move short pointer
+        else:
+            id1 += 1  # equals chars, move first pointer
+        id2 += 1  # always move second pointer
+    
+    return True
+
 
 class TestOneWay(unittest.TestCase):
-    def test_one_way_inserts(self):
+    def test_one_way(self):
+        # inserts
         self.assertEqual(one_way_simple("pale", "pales"), True)  # in the end
         self.assertEqual(one_way_simple("pale", "spale"), True)  # in the beginning
         self.assertEqual(one_way_simple("pale", "palse"), True)  # in the middle
 
-    def test_one_way_removes(self):
+        # removes
         self.assertEqual(one_way_simple("pale", "pal"), True)  # in the end
         self.assertEqual(one_way_simple("pale", "ale"), True)  # in the beginning
         self.assertEqual(one_way_simple("pale", "ple"), True)  # in the middle
 
-    def test_one_way_replace(self):
+        # replaces
         self.assertEqual(one_way_simple("pale", "pals"), True)  # in the end
         self.assertEqual(one_way_simple("pale", "sale"), True)  # in the beginning
         self.assertEqual(one_way_simple("pale", "pase"), True)  # in the middle
 
-    def test_one_way_separate_replace(self):
+    def test_one_way_separate(self):
+        # replaces
         self.assertEqual(one_way_separate("pale", "pals"), True)  # in the end
         self.assertEqual(one_way_separate("pale", "sale"), True)  # in the beginning
         self.assertEqual(one_way_separate("pale", "pase"), True)  # in the middle
 
-    def test_one_way_separate_inserts(self):
+        # inserts
         self.assertEqual(one_way_separate("pale", "pales"), True)  # in the end
         self.assertEqual(one_way_separate("pale", "spale"), True)  # in the beginning
         self.assertEqual(one_way_separate("pale", "palse"), True)  # in the middle
     
-    def test_one_way_separate_removes(self):
+        # removes
         self.assertEqual(one_way_simple("pale", "pal"), True)  # in the end
         self.assertEqual(one_way_simple("pale", "ale"), True)  # in the beginning
         self.assertEqual(one_way_simple("pale", "ple"), True)  # in the middle
+
+    def test_one_way_unified(self):
+        # replaces
+        self.assertEqual(one_way_unified("pale", "pals"), True)  # in the end
+        self.assertEqual(one_way_unified("pale", "sale"), True)  # in the beginning
+        self.assertEqual(one_way_unified("pale", "pase"), True)  # in the middle
+
+        # inserts
+        self.assertEqual(one_way_unified("pale", "pales"), True)  # in the end
+        self.assertEqual(one_way_unified("pale", "spale"), True)  # in the beginning
+        self.assertEqual(one_way_unified("pale", "palse"), True)  # in the middle
+
+        # removes
+        self.assertEqual(one_way_simple("pale", "pal"), True)  # in the end
+        self.assertEqual(one_way_simple("pale", "ale"), True)  # in the beginning
+        self.assertEqual(one_way_simple("pale", "ple"), True)  # in the middle
+
 
 if __name__ == "__main__":
     # print(one_way("pale", "pales"))
