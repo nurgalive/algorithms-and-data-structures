@@ -4,7 +4,7 @@
 // True length used to count actual amount of spaces
 
 package q1_03_urlify;
-public class urlify {
+public class Urlify {
   
   void replaceSpaces(char[] str, int trueLength) {
     int spaceCount = 0, index, i = 0;
