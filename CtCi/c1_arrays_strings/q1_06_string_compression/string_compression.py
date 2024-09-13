@@ -13,6 +13,8 @@ inefficient.
 
 """
 
+import unittest
+
 
 def compress(string: str) -> str:
     """
@@ -73,8 +75,7 @@ def compress_with_compare(string: str) -> str:
 
     return "".join(result)
 
-            
-    
+        
 def len_compress(string: str) -> int:
     """
     Returns the compressed string length.
@@ -91,12 +92,23 @@ def len_compress(string: str) -> int:
             count = 0
 
     return  compress_len
-        
+
+
+class TestCompress(unittest.TestCase):
+    cases = [("aabcccccaaa", "a2b1c5a3",), ("abcdefg", "abcdefg",), 
+             ("aaaaaaaaaaaa", "a12",)]
+    
+    def test_compress(self):
+        for string, expected in self.cases:
+            with self.subTest(string=string, expected=expected):
+                self.assertEqual(compress(string), expected)
+                self.assertEqual(compress_with_compare(string), expected)
+    
+    def test_len_compress(self):
+        self.assertEqual(len_compress(""), 0)
+        self.assertEqual(len_compress("aabcccccaaa"), 8)
+        self.assertEqual(len_compress("aaaaaaaaaaaa"), 3)
 
 
 if __name__ == "__main__":
-    print(compress("aabcccccaaa"))  # a2blc5a3
-    print(compress(""))  # a2blc5a3
-    print(compress("abcdefg"))  # a2blc5a3
-    print(len_compress("aabcccccaaa"))  # 8
-    print(compress_with_compare("aabcccccaaa"))  # a2blc5a3
+    unittest.main()
