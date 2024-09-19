@@ -10,6 +10,11 @@ Hints: #51, #100
 asked to swap the values in two arrays, could you do this? Can you then extend it to four
 arrays?
 
+This problem is very hard to me.
+
+Amazing explanation.
+https://www.youtube.com/watch?v=fMSJSS7eO1w
+
 """
 
 def rotate_matrix(matrix: list[list[int]]) -> list:
