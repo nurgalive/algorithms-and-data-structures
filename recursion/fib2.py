@@ -2,7 +2,7 @@
 Cracking the coding interview. Example 15. Page 53.
 
 Improved version of searching for Nth fibonacci number function using cache.
-For details about Fibonacci numbers loot in fib.py
+For details about Fibonacci numbers look in fib.py
 """
 
 def allFib(n: int):
