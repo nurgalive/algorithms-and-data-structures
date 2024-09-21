@@ -33,7 +33,7 @@ def timeit_sorting():
     time_taken2 = timeit.timeit(lambda: sequential_quicksort(arr), number=1)
     # print("Sorted array:", parallel_quicksort(arr))
     print("Time taken parallel:", time_taken, "seconds")
-    print("Time taken sequeintial:", time_taken2, "seconds")
+    print("Time taken sequential:", time_taken2, "seconds")
 
 if __name__ == "__main__":
     timeit_sorting()
