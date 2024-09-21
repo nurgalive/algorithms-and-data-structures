@@ -11,41 +11,75 @@ asked to swap the values in two arrays, could you do this? Can you then extend i
 arrays?
 
 This problem is very hard to me.
+Those many indexes drives me crazy.
 
 Amazing explanation.
 https://www.youtube.com/watch?v=fMSJSS7eO1w
 
 """
+class Question:
+    """
+    In place update of the matrix.
+    """
+    def __init__(self, matrix: list[list[int]]):
+        self.matrix = matrix
 
-def rotate_matrix(matrix: list[list[int]]) -> list:
-    size = len(matrix)
-    layers = size // 2
-    # iterate over layers. Starting the outermost layer, start=0
-    for layer in range(layers):
-        # For example, in a 4x4 matrix:
-        # For layer 0: first = 0, last = 3.
-        # For layer 1: first = 1, last = 2.
-        first_element_id = layer  # current layer
-        last_element_id = size - layer - 1  # current layer
-        for i in range(first_element_id, last_element_id):
-            offset = i - first_element_id
-            top = matrix[layer][i]
+    def rotate_matrix(self) -> bool:
+        """
+        Time complexity: O(N^2)
+        Space complexity: O(1)
+        """
+        for i in range(len(self.matrix)):
+            if len(self.matrix) != len(self.matrix[i]):
+                return False
+            
+        size = len(self.matrix)
+        layers = size // 2
+        # iterate over layers. Starting the outermost layer, start=0
+        for layer in range(layers):
+            # For example, in a 4x4 matrix:
+            # For layer 0: first = 0, last = 3.
+            # For layer 1: first = 1, last = 2.
+            left = layer  # current layer
+            right = size - 1 - layer  # current layer
+            for i in range(left, right):
+                offset = i - left
+                top = self.matrix[left][i]
 
-            # left -> top
-            matrix[layer][i] = matrix[last_element_id - offset][first_element_id]
+                # left -> top
+                self.matrix[left][i] = self.matrix[right - offset][left]
 
-    return matrix
+                # bottom -> left
+                self.matrix[right - offset][left] = self.matrix[right][right - offset]
 
-def print_matrix(matrix: list):
-    height = len(matrix)
-    width = len(matrix[0])
+                # right -> bottom
+                self.matrix[right][right - offset] = self.matrix[i][right]
 
-    for h in range(height):
+                # top -> right
+                self.matrix[i][right] = top
+
+        return True
+
+    def print_matrix(self):
+        for i in range(len(self.matrix)):
+            if len(self.matrix) != len(self.matrix[i]):
+                return False
+        height = len(self.matrix)
+        width = len(self.matrix[0])
+
+        for h in range(height):
+            print("")
+            for w in range(width):
+                print(self.matrix[h][w], end="\t")
+        
         print("")
-        for w in range(width):
-            print(matrix[h][w], end="\t")
+        return True
+    
+
 
 if __name__ == "__main__":
     input = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-    print_matrix(input)
-    # rotate_matrix(input)
+    q = Question(input)
+    q.print_matrix()
+    q.rotate_matrix()
+    q.print_matrix()
