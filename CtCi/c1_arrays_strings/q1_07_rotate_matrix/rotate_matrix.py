@@ -21,7 +21,7 @@ https://www.youtube.com/watch?v=fMSJSS7eO1w
 Solution using transposing and reflecting the matrix:
 https://www.youtube.com/watch?v=-jhbxNJijyE
 
-Explaining how the way of thinking with matrixes can looks like:
+Explaining how the way of thinking with matrices can look like:
 https://www.youtube.com/watch?v=Z0R2u6gd3GU
 
 Examples:
@@ -94,21 +94,67 @@ def print_matrix(matrix):
             print(matrix[h][w], end="\t")
     
     print("")
-    return True
     
+def rotate_matrix2(matrix: list[list[int]]) -> list[list[int]]:
+    """
+    Solution from NeetCode.
+    https://www.youtube.com/watch?v=fMSJSS7eO1w
+
+    My preferable solution.
+    Time: O(N^2)
+    Space: O(1) - in-place updates
+
+    """
+    l, r = 0, len(matrix) - 1  # (l - left, r - right) pointers
+
+    while l < r:
+        for i in range(r - l):
+            top, bottom = l, r
+
+            # 1. save the top left
+            top_left = matrix[top][l + i]
+
+            # 2. move bottom left into top left
+            matrix[top][l + i] = matrix[bottom - i][l]
+
+            # 3. move bottom right into bottom left
+            matrix[bottom - i][l] = matrix[bottom][r - i]
+
+            # 4. move top right into bottom right
+            matrix[bottom][r - i] = matrix[top + i][r]
+
+            # 5. move top left into top right
+            matrix[top + i][r] = top_left
+        
+        # updating left and right pointers
+        r -= 1 
+        l += 1
+
+    return matrix
+
 def rotate_matrix_pythonic_alternate(matrix):
-    """rotates a matrix 90 degrees clockwise"""
+    """
+    Rotates a matrix 90 degrees clockwise.
+    Funny true production solution.
+    """
     return [list(reversed(row)) for row in zip(*matrix)]
 
 if __name__ == "__main__":
+    # while running comment other solutions, since
+    # they do in-place updates, will produce
+    # incorrect results
+
     input = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
     print_matrix(input)
 
     # solution 1
-    q = Question(input)
-    print_matrix(q.matrix)
-    q.rotate_matrix()
-    print_matrix(q.matrix)
+    # q = Question(input)
+    # print_matrix(q.matrix)
+    # q.rotate_matrix()
+    # print_matrix(q.matrix)
 
     # solution 2
-    print_matrix(rotate_matrix_pythonic_alternate(input))
+    print_matrix(rotate_matrix2(input))
+
+    # solution 3
+    # print_matrix(rotate_matrix_pythonic_alternate(input))
