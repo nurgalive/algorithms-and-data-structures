@@ -3,7 +3,7 @@
 
 def binary_search(arr: list, item: int) -> int: 
     low = 0
-    high = len(arr) - 1
+    high = len(arr) - 1  # actual last index
 
     while low <= high:
         mid = (low + high) // 2
