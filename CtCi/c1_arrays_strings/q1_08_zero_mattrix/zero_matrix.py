@@ -32,11 +32,11 @@ sys.path.append(str(Path(sys.argv[0]).resolve().parent.parent))
 
 from common_f import print_matrix
 
-def zero_matrix(matrix: list[list[int]]) -> list[list[int]]:
+def zero_matrix1(matrix: list[list[int]]) -> list[list[int]]:
     """
     Brute force solution.
-    Time complexity: O(N^2)
-    Space complexity: O(N)
+    Time complexity: O(M*N)
+    Space complexity: O(M+N)
 
     i - row
     j - column
@@ -70,14 +70,62 @@ def zero_matrix(matrix: list[list[int]]) -> list[list[int]]:
         set_row_to_zero = False
     
     return matrix
+
+def zero_matrix2(matrix: list[list[int]]) -> list[list[int]]:
+    """
+    Time complexity: O(N^2). Iterate every value in the matrix.
+    Space complexity: O(1). Fixed amount for memory. 1 additional var + we use matrix itself.
+    i - rows
+    j - columns
+    
+    """
+
+    # TODO: Switch len(matrix) to ROWS
+    # TODO: Switch len(matrix[0]) to COLUMNS
+    # TODO: Add usage of first_column_row_zero
+
+    first_column_row_zero = False
+
+    if matrix[0][0] == 0:
+        first_column_row_zero = True
+
+    # search for the zeroes
+    for i in range(len(matrix)):
+        for j in range(len(matrix[0])):
+            if matrix[i][j] == 0:
+                # save row
+                matrix[i][0] = 0
+
+                # save column
+                matrix[0][j] = 0
+
+   
+
+    # making columns zero
+    for j in range(len(matrix[0])):
+        if matrix[0][j] == 0:
+            for i in range(len(matrix)):
+                matrix[i][j] = 0
+
+    
+    # making rows zero
+    for i in range(len(matrix)):
+        if matrix[i][0] == 0:
+            for j in range(len(matrix[0])):
+                matrix[i][j] = 0
+    
+
+    return matrix
                 
 
 if __name__ == "__main__":
     matrix_1 = [[1, 2, 3, 4], [5, 0, 6, 7], [8, 9, 10, 11]]
     matrix_2 = [[1, 2, 3, 4], [5, 0, 6, 7], [8, 9, 10, 0]]
     print_matrix(matrix_1)
-    print_matrix(zero_matrix(matrix_1))
-    print_matrix(matrix_2)
-    print_matrix(zero_matrix(matrix_2))
+    print_matrix(zero_matrix2(matrix_1))
+    # print_matrix(zero_matrix1(matrix_1))
+
+    # print_matrix(matrix_2)
+    # print_matrix(zero_matrix1(matrix_2))
 
 
