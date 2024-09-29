@@ -1,6 +1,9 @@
 # Grokking algos, page 9
 # Complexity: O(log n)
 
+# LeetCode
+# https://leetcode.com/problems/binary-search/description/
+
 def binary_search(arr: list, item: int) -> int: 
     low = 0
     high = len(arr) - 1  # actual last index
