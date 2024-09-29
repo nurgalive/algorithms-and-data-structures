@@ -1,8 +1,13 @@
-# Grokking algos, page 9
-# Complexity: O(log n)
+"""
+Grokking algos, page 9
 
-# LeetCode
-# https://leetcode.com/problems/binary-search/description/
+LeetCode
+https://leetcode.com/problems/binary-search/description
+
+Time complexity: O(log n)
+Space complexity: O(1)
+
+"""
 
 def binary_search(arr: list, item: int) -> int: 
     low = 0
