@@ -10,6 +10,9 @@ Hint 3: Can you solve it in O(N log N) time? What might a solution like that loo
 Questions to aks
 Is it ASCII (128) or Unicode string?
 Create 128 array
+
+LeetCode: https://leetcode.com/problems/contains-duplicate/solutions/
+
 """
 
 import unittest
@@ -32,6 +35,10 @@ def is_unique1(string: str) -> bool:
 
     return True
 
+
+# another solution would be to sort the string and check the adjacent values
+# Time: O(nlogn)
+# Space: O(1)
 
 def is_unique2(string: str) -> bool:
     """
@@ -56,6 +63,12 @@ def is_unique2(string: str) -> bool:
         else:
             arr[ord(s)] = 1
     return True
+
+# If we use the hash map solution for the huge amount of possible characters,
+# then we have to use HashMap.
+# It is the case for the leetcode problem.
+# Time: O(N)
+# Space: O(N)
 
 
 def is_unique3(string: str) -> bool:
