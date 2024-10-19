@@ -11,6 +11,7 @@ Questions to aks
 Is it ASCII (128) or Unicode string?
 Create 128 array
 
+LeetCode problem is slightly different.
 LeetCode: https://leetcode.com/problems/contains-duplicate/solutions/
 
 """
@@ -18,6 +19,21 @@ LeetCode: https://leetcode.com/problems/contains-duplicate/solutions/
 import unittest
 from timeit import timeit
 
+def containsDuplicate(nums: list[int]) -> bool:
+    """
+    Solution for the leetcode problem.
+    Time complexity: O(N). We need to touch every element.
+    Space complexity: O(N). We need to store every element.
+    Using set is more simple, than using hashmap.
+    """
+    set_ = set()
+
+    for n in nums:
+        if n in set_:
+            return True
+        else:
+            set_.add(n)
+    return False
 
 def is_unique1(string: str) -> bool:
     """
@@ -65,7 +81,7 @@ def is_unique2(string: str) -> bool:
     return True
 
 # If we use the hash map solution for the huge amount of possible characters,
-# then we have to use HashMap.
+# then we have to use HashMap or better Set.
 # It is the case for the leetcode problem.
 # Time: O(N)
 # Space: O(N)
@@ -112,6 +128,11 @@ class TestIsUnique(unittest.TestCase):
         ("a" * 128 + "b", False),
     ]
 
+    leetcode = [
+        ([1, 2, 3], False),
+        ([1, 2, 3, 1], True)
+    ]
+
     def test_basic_cases(self):
         for string, result in self.basic_cases:
             with self.subTest(input_data=string, result=result):
@@ -125,6 +146,11 @@ class TestIsUnique(unittest.TestCase):
                 self.assertEqual(is_unique1(string), result)
                 self.assertEqual(is_unique2(string), result)
                 self.assertEqual(is_unique3(string), result)
+
+    def test_containsDuplicate(self):
+        for nums, result in self.leetcode:
+            with self.subTest(input_data=nums, result=result):
+                self.assertEqual(containsDuplicate(nums), result)
 
 
 if __name__ == "__main__":
