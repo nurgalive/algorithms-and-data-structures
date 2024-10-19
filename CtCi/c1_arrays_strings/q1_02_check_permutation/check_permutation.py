@@ -14,9 +14,71 @@ but is O(N) time [array or dict for storing frequencies]
 122. 1.2 Could a hash table be useful? [Yes, we can use it for storing frequencies]
 131. 1.2 Two strings that are permutations should have the same characters, but in different
 orders. Can you make the orders the same? [yes, by using sorting]
+
+
+LeetCode: https://leetcode.com/problems/valid-anagram
 """
 
 import unittest
+
+class Solution1(object):
+    """
+    Only lowercase English letters solution,
+    using the array.
+    """
+    def isAnagram(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
+        
+        if len(s) != len(t):
+            return False
+
+        counter = [0 for i in range(26)]
+
+        for s_ in s:
+            counter[self.pos(s_)] += 1
+
+        for t_ in t:
+            counter[self.pos(t_)] -= 1
+
+        for i in range(len(counter)):
+            if counter[i] != 0:
+                return False
+        return True
+    
+    def pos(self, s):
+        return ord(s) - ord("a")
+
+class Solution2(object):
+    """
+    Unicode colution using hashmap.
+    Or a case, when we don't know in advance amount of characters.
+    Time complexity: O(N)
+    Space complexity: O(N)
+    """
+    def isAnagram(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
+        
+        if len(s) != len(t):
+            return False
+
+        counter = {}
+
+        for s_ in s:
+            counter[s_] = counter.get(s_, 0) + 1
+
+        for t_ in t:
+            counter[t_] = counter.get(t_, 0) - 1
+            if counter[t_] < 0:
+                return False
+        return True
 
 
 def check_permutation1(str1: str, str2: str) -> bool:
