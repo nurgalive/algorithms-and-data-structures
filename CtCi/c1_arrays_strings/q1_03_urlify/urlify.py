@@ -34,6 +34,16 @@ https://codereview.stackexchange.com/questions/141391/urlify-a-character-array-u
 Commentators in those links point out, that it is not possible to comply with the O(1) requirement,
 since in python we have to make a copy of the string. Strings in python are immutable.
 
+Thanks to AI, found an analog on LeetCode:
+https://leetcode.com/problems/rearrange-spaces-between-words
+
+LeetCode task is not exactly the same.
+It is about properly counting the spaces and arranging them.
+In order to solve this question knowledge of the Python methods is important.
+split() - find words
+count() - count spaces
+.join - creating strings
+
 """
 
 # my naive solution
