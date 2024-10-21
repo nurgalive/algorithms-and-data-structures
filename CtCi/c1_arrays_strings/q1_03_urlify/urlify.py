@@ -27,6 +27,8 @@ And the input array (char) size is 17, because for every existing space characte
 two more spaces are added. It means, that the string has two spaces, which equals to 6 spaces required, 
 in order to replace spaces with '%20' and have enough space.
 
+Check the urlify_viz.png for more details.
+
 More solutions:
 https://codereview.stackexchange.com/questions/141281/urlify-a-string-using-python
 https://codereview.stackexchange.com/questions/141391/urlify-a-character-array-using-python-follow-up
@@ -37,12 +39,6 @@ since in python we have to make a copy of the string. Strings in python are immu
 Thanks to AI, found an analog on LeetCode:
 https://leetcode.com/problems/rearrange-spaces-between-words
 
-LeetCode task is not exactly the same.
-It is about properly counting the spaces and arranging them.
-In order to solve this question knowledge of the Python methods is important.
-split() - find words
-count() - count spaces
-.join - creating strings
 
 """
 
