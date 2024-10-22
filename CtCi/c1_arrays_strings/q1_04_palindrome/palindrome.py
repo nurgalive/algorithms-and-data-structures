@@ -48,7 +48,6 @@ Unfortunately, the community solution in Python also has the same error.
 Check tests below for the exact case.
 Here is the power of community and the LeetCode.
 For completeness I left old version of code.
-
 """
 
 import unittest
@@ -72,8 +71,7 @@ class Solution1:
             if s[i] != s[index]:
                 return False
             index -= 1
-        return True
-        
+        return True  
 
     def clean(self, s: str) -> str:
         res = []
@@ -94,6 +92,27 @@ class Solution1:
         else:
             return -1
 
+class Solution2:
+    def isPalindrome(self, s: str) -> bool:
+        if len(s) == 1:
+            return True
+
+        head = 0
+        tail = len(s) - 1
+
+        while head < tail:
+            if not s[head].isalnum():
+                head += 1
+                continue
+            if not s[tail].isalnum():
+                tail -= 1
+                continue
+            if s[head].lower() != s[tail].lower():
+                return False
+            else:
+                head += 1
+                tail -= 1
+        return True
 
 def palindrome_hashmap(input: str):
     """
@@ -204,6 +223,11 @@ class TestPalindrome(unittest.TestCase):
         for string, result in self.test_cases:
             with self.subTest(string=string, result=result):
                 self.assertEqual(Solution1().isPalindrome(string), result)
+
+    def test_palindrome_sol2(self):
+        for string, result in self.test_cases:
+            with self.subTest(string=string, result=result):
+                self.assertEqual(Solution2().isPalindrome(string), result)
         
 
 class TestGetCharId(unittest.TestCase):
