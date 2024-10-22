@@ -4,7 +4,7 @@ package q1_04_palindrome;
  * Solution from the author.
  * https://github.com/careercup/CtCI-6th-Edition/blob/master/Java/Ch%2001.%20Arrays%20and%20Strings/Q1_04_Palindrome_Permutation/QuestionC.java
  * 
- * Left it here to solve it later in python.
+ * Left it here to see how the author solved it.
  * 
  */
 

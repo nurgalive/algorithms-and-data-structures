@@ -41,6 +41,13 @@ even - четный
 
 LeetCode - https://leetcode.com/problems/valid-palindrome
 Requires premium - https://leetcode.com/problems/palindrome-permutation/
+
+Interesting, thanks to LeetCode, I found an obvious error in the code.
+And what is even more interesting, I found an error in code of the original author of book.
+Unfortunately, the community solution in Python also has the same error.
+Check tests below for the exact case.
+Here is the power of community and the LeetCode.
+
 """
 
 import unittest
@@ -121,38 +128,45 @@ def get_char_id(char: str) -> int:
 
 
 class TestPalindrome(unittest.TestCase):
+    test_cases = [
+        ("taco cat", True),
+        ("Rats live on no evil star", True),
+        ("Able was I ere I saw Elba", True),
+        ("Lleve", True),
+        ("Tacotac", True),
+        ("asda", False),
+        ("A man, a plan, a canal, panama", True),
+        ("abb", False)  # this test from LeetCode is not working
+    ]
+
     def test_palindrome_simple(self):
-        self.assertEqual(palindrome_hashmap("taco cat"), True)
-        self.assertEqual(palindrome_hashmap("Rats live on no evil star"), True)
-        self.assertEqual(palindrome_hashmap("Able was I ere I saw Elba"), True)
-        self.assertEqual(palindrome_hashmap("Lleve"), True)
-        self.assertEqual(palindrome_hashmap("Tacotac"), True)
-        self.assertEqual(palindrome_hashmap("asda"), False)
-        self.assertEqual(palindrome_hashmap("A man, a plan, a canal, panama"), True)
-        self.assertEqual(palindrome_hashmap("abb"), False)
+        for string, result in self.test_cases:
+            with self.subTest(string=string, result=result):
+                self.assertEqual(palindrome_hashmap(string), result)
 
     def test_palindrome_array(self):
-        self.assertEqual(palindrome_array("taco cat"), True)
-        self.assertEqual(palindrome_array("Rats live on no evil star"), True)
-        self.assertEqual(palindrome_array("Able was I ere I saw Elba"), True)
-        self.assertEqual(palindrome_array("Lleve"), True)
-        self.assertEqual(palindrome_array("Tacotac"), True)
-        self.assertEqual(palindrome_array("asda"), False)
-        self.assertEqual(palindrome_array("A man, a plan, a canal, panama"), True)
-        self.assertEqual(palindrome_hashmap("abb"), False)
+        for string, result in self.test_cases:
+            with self.subTest(string=string, result=result):
+                self.assertEqual(palindrome_array(string), result)
         
 
 class TestGetCharId(unittest.TestCase):
+    test_conversion = [
+        ("a", 0),
+        ("b", 1),
+        ("z", 25),
+        ("A", 0),
+        ("B", 1),
+        ("Z", 25),
+        ("@", -1),
+        (" ", -1),
+        (",", -1)
+    ]
+
     def test_get_char_id(self):
-        self.assertEqual(get_char_id("a"), 0)
-        self.assertEqual(get_char_id("b"), 1)
-        self.assertEqual(get_char_id("z"), 25)
-        self.assertEqual(get_char_id("A"), 0)
-        self.assertEqual(get_char_id("B"), 1)
-        self.assertEqual(get_char_id("Z"), 25)
-        self.assertEqual(get_char_id("@"), -1)
-        self.assertEqual(get_char_id(" "), -1)
-        self.assertEqual(get_char_id(","), -1)
+        for string, result in self.test_conversion:
+            with self.subTest(string=string, result=result):
+                self.assertEqual(get_char_id(string), result)
 
 if __name__ == "__main__":
     # print(palindrome_array("taco cat"))
