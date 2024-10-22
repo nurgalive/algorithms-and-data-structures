@@ -37,6 +37,10 @@ https://github.com/careercup/CtCI-6th-Edition-Python/blob/e6bc732588601d0a98e5b1
 
 odd - нечетный
 even - четный
+
+
+LeetCode - https://leetcode.com/problems/valid-palindrome
+Requires premium - https://leetcode.com/problems/palindrome-permutation/
 """
 
 import unittest
@@ -125,6 +129,7 @@ class TestPalindrome(unittest.TestCase):
         self.assertEqual(palindrome_hashmap("Tacotac"), True)
         self.assertEqual(palindrome_hashmap("asda"), False)
         self.assertEqual(palindrome_hashmap("A man, a plan, a canal, panama"), True)
+        self.assertEqual(palindrome_hashmap("abb"), False)
 
     def test_palindrome_array(self):
         self.assertEqual(palindrome_array("taco cat"), True)
@@ -134,6 +139,7 @@ class TestPalindrome(unittest.TestCase):
         self.assertEqual(palindrome_array("Tacotac"), True)
         self.assertEqual(palindrome_array("asda"), False)
         self.assertEqual(palindrome_array("A man, a plan, a canal, panama"), True)
+        self.assertEqual(palindrome_hashmap("abb"), False)
         
 
 class TestGetCharId(unittest.TestCase):
