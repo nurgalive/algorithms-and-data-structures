@@ -47,10 +47,53 @@ And what is even more interesting, I found an error in code of the original auth
 Unfortunately, the community solution in Python also has the same error.
 Check tests below for the exact case.
 Here is the power of community and the LeetCode.
+For completeness I left old version of code.
 
 """
 
 import unittest
+
+class Solution1:
+    """
+    LeetCode solution.
+    Using two pointers.
+    Time complexity: O(S)
+    Space complexity: O(1)
+    """
+    def isPalindrome(self, s: str) -> bool:
+        if len(s) == 1:
+            return True
+
+        s = self.clean(s).lower()
+        mid = len(s) // 2 
+        index = len(s) - 1
+
+        for i in range(mid):
+            if s[i] != s[index]:
+                return False
+            index -= 1
+        return True
+        
+
+    def clean(self, s: str) -> str:
+        res = []
+        for char in s:
+            if self.pos(char) != -1:
+                res.append(char)
+        return "".join(res)
+
+    def pos(self, s: str) -> int:
+        if ord("a") <= ord(s) <= ord("z"):
+            return ord(s) - ord("a")
+        elif ord("A") <= ord(s) <= ord("Z"):
+            return ord(s) - ord("A")
+        elif ord("0") <= ord(s) <= ord("9"):
+            return ord(s)
+        elif s == " ":
+            return -1
+        else:
+            return -1
+
 
 def palindrome_hashmap(input: str):
     """
@@ -132,22 +175,35 @@ class TestPalindrome(unittest.TestCase):
         ("taco cat", True),
         ("Rats live on no evil star", True),
         ("Able was I ere I saw Elba", True),
-        ("Lleve", True),
-        ("Tacotac", True),
+        ("Lleve", False),
+        ("Tacotac", False),
         ("asda", False),
         ("A man, a plan, a canal, panama", True),
-        ("abb", False)  # this test from LeetCode is not working
+        ("abb", False),  # this test from LeetCode is not working
+        ("abba", True),
+        ("abbt", False),
+        (" ", True),
+        ("a", True),
+        ("a.", True),
+        ("a0", False),
     ]
 
-    def test_palindrome_simple(self):
-        for string, result in self.test_cases:
-            with self.subTest(string=string, result=result):
-                self.assertEqual(palindrome_hashmap(string), result)
+    # for completeness I left old version of code
+    # def test_palindrome_simple(self):
+    #     for string, result in self.test_cases:
+    #         with self.subTest(string=string, result=result):
+    #             self.assertEqual(palindrome_hashmap(string), result)
 
-    def test_palindrome_array(self):
+    # for completeness I left old version of code
+    # def test_palindrome_array(self):
+    #     for string, result in self.test_cases:
+    #         with self.subTest(string=string, result=result):
+    #             self.assertEqual(palindrome_array(string), result)
+    
+    def test_palindrome_sol1(self):
         for string, result in self.test_cases:
             with self.subTest(string=string, result=result):
-                self.assertEqual(palindrome_array(string), result)
+                self.assertEqual(Solution1().isPalindrome(string), result)
         
 
 class TestGetCharId(unittest.TestCase):
