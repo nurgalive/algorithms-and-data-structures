@@ -114,6 +114,35 @@ class Solution2:
                 tail -= 1
         return True
 
+
+def isalnumchar(char: str) -> bool:
+    """
+    My own implementation of the .isalnum()
+    """
+    if ord("a") <= ord(char) <= ord("z"):
+        return True
+    elif ord("A") <= ord(char) <= ord("Z"):
+        return True
+    elif ord("0") <= ord(char) <= ord("9"):
+        return True
+    else:
+        return False 
+
+def to_lower(char: str) -> str:
+    """
+    My own implementation of lower()
+    """
+    arr = []
+    print(arr)
+    for c in char:
+        print(c)
+        if ord("A") <= ord(c) <= ord("Z"):
+            arr.append(chr(ord("a") + ord(c) - ord("A")))
+        else:
+            arr.append(c)
+    return "".join(arr)
+
+
 def palindrome_hashmap(input: str):
     """
     O(s) - time and space.
