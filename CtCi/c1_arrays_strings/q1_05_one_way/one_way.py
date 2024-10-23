@@ -73,9 +73,9 @@ def one_way_separate(str1: str, str2: str) -> bool:
     """
     if len(str1) == len(str2):
        return check_replace(str1, str2)
-    if len(str1) + 1 == len(str2) or len(str1) == len(str2) + 1:
+    if len(str1) + 1 == len(str2):
         return check_insert_remove(str1, str2)
-    if len(str1) - 1 == len(str2) or len(str1) == len(str2) - 1:
+    if len(str1) - 1 == len(str2):
         return check_insert_remove(str2, str1)
     else:
         return False  # in case the difference more than one
@@ -103,8 +103,8 @@ def check_insert_remove(str1: str, str2: str):
     id1 = 0
     id2 = 0
     while id1 < len(str1) and id2 < len(str2):
-        if str1[id1] != str2[id2]:  # if index it it not same, is okay, change the
-            if id1 != id2:
+        if str1[id1] != str2[id2]:  # if index it it not same, is okay, change the pointer
+            if id1 != id2:  # if chars are not equal and pointer already moved -> more than one change
                 return False
             id2 += 1
         else:
@@ -119,7 +119,7 @@ def one_way_unified(str1: str, str2: str) -> bool:
     found_diff = False
     id1 = 0
     id2 = 0
-    while id1 < len(long_str) and id2 < len(short_str):
+    while id1 < len(short_str) and id2 < len(long_str):
         if str1[id1] != str2[id2]:
             if found_diff:
                 return False
@@ -163,9 +163,9 @@ class TestOneWay(unittest.TestCase):
         self.assertEqual(one_way_separate("pale", "palse"), True)  # in the middle
     
         # removes
-        self.assertEqual(one_way_simple("pale", "pal"), True)  # in the end
-        self.assertEqual(one_way_simple("pale", "ale"), True)  # in the beginning
-        self.assertEqual(one_way_simple("pale", "ple"), True)  # in the middle
+        self.assertEqual(one_way_separate("pale", "pal"), True)  # in the end
+        self.assertEqual(one_way_separate("pale", "ale"), True)  # in the beginning
+        self.assertEqual(one_way_separate("pale", "ple"), True)  # in the middle
 
     def test_one_way_unified(self):
         # replaces
@@ -179,9 +179,9 @@ class TestOneWay(unittest.TestCase):
         self.assertEqual(one_way_unified("pale", "palse"), True)  # in the middle
 
         # removes
-        self.assertEqual(one_way_simple("pale", "pal"), True)  # in the end
-        self.assertEqual(one_way_simple("pale", "ale"), True)  # in the beginning
-        self.assertEqual(one_way_simple("pale", "ple"), True)  # in the middle
+        self.assertEqual(one_way_unified("pale", "pal"), True)  # in the end
+        self.assertEqual(one_way_unified("pale", "ale"), True)  # in the beginning
+        self.assertEqual(one_way_unified("pale", "ple"), True)  # in the middle
 
 
 if __name__ == "__main__":
