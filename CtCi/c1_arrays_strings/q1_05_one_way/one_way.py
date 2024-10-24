@@ -120,12 +120,12 @@ def one_way_unified(str1: str, str2: str) -> bool:
     id1 = 0
     id2 = 0
     while id1 < len(short_str) and id2 < len(long_str):
-        if str1[id1] != str2[id2]:
+        if short_str[id1] != long_str[id2]:
             if found_diff:
                 return False
             found_diff = True
 
-            if len(str1) == len(str2): # strings the same size - replace case
+            if len(short_str) == len(long_str): # strings the same size - replace case
                 id1 += 1  # move short pointer
         else:
             id1 += 1  # equals chars, move first pointer
