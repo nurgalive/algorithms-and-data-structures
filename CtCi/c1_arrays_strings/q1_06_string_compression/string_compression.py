@@ -11,6 +11,8 @@ Hints:#92, #110
 #110. 1.6 Be careful that you aren't repeatedly concatenating strings together. This can be very
 inefficient.
 
+LeetCode: https://leetcode.com/problems/string-compression
+
 """
 
 import unittest
