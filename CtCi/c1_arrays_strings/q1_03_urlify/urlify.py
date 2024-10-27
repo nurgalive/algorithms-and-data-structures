@@ -74,12 +74,12 @@ def urlify2(string: str, length: int):
 def urlify3(string: str, true_length: int) -> str:
     """
     Algo:
-    1. Create an array from the string
-    2. Count spaces using true_length
-    3. Starting from back, move characters to the back of the array.
-    If character is a space, add '%20'
-    Start from the end.
-    It it is a space - ignore, else add to the result.
+    1. Create an array from the string, also check edge cases.
+    2. Count spaces using true_length, in order to find out the last index
+    3. Starting from back, move characters to the back of the array, using second index
+    4. If character is a space, add '%20'
+    5. It it is a letter - move to the index pointer position.
+    6. Return string from the array.
 
     """
     space_count = 0
@@ -90,6 +90,7 @@ def urlify3(string: str, true_length: int) -> str:
     if len(string1) < true_length:
         return "Error, true length smaller than the string"
 
+    # counting spaces
     for s in range(true_length):
         if string1[s] == ' ':
             space_count += 1
@@ -102,6 +103,7 @@ def urlify3(string: str, true_length: int) -> str:
     # index keeps track of the location from the end of array
 
     # this loop should repeat true_lengths times
+    # true_length - 1, minus one because when iterating backwards, we need to get last actual index
     for i in range(true_length - 1, 0, -1):
         if string1[i] == ' ':
             string1[index - 1] = '0'
@@ -117,16 +119,31 @@ def urlify3(string: str, true_length: int) -> str:
 
     return "".join(string1)
 
-
-# def urlify4(string: str, length: int) -> str:
-#     string1 = list(string) # ?
-#     result = [0 for i in range(length)]
-
-#     space_count = string1.count(" ")
-#     print(space_count)
+def urlify4(text: str, true_len: int) -> str:
+    """
+    My official solution, using two pointers.
+    Time complexity: O(true_len)
+    Space complexity: O(1)
+    """
+    if true_len > len(text):
+        return ("Text is smaller than true length")
+    
+    text_arr = list(text)
+    index = len(text_arr) - 1  # actual last index
+    for i in range(true_len - 1, 1, -1):
+        if text_arr[i] == " ":
+            text_arr[index] = "0"
+            text_arr[index - 1] = "2"
+            text_arr[index - 2] = "%"
+            index -= 3
+        else:
+            text_arr[index] = text[i]
+            index -= 1
+    
+    return "".join(text_arr)
 
 
 if __name__ == "__main__":
-    print(urlify3("Mr John Smith    ", 13))
+    print(urlify4("Mr John Smith    ", 13))
     # Expected output: 
     # Mr%20John%20Smith
