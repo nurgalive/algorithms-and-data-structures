@@ -17,6 +17,38 @@ LeetCode: https://leetcode.com/problems/string-compression
 
 import unittest
 
+class Solution:
+    """
+    Initial LeetCode solution.
+    
+    Run:
+    chars = ["a","a","a","b","b","a","a"]
+    print(chars[0:Solution().compress(chars)])
+    """
+    def compress(self, chars: list[str]) -> int:
+        if len(chars) == 1:
+            return len(chars)
+
+        r = 0
+        i = 0
+        while i < len(chars):
+            print("l", r)
+            print("r", i)
+            curr_char = chars[r]
+            counter = 0
+            while i < len(chars) and curr_char == chars[i]:
+                counter += 1
+                i += 1
+
+            chars[r] = curr_char
+            r += 1
+            if counter > 1:
+                counter_str = str(counter)
+                for j in range(len(counter_str)):
+                    chars[r] = counter_str[j]
+                    r += 1
+
+        return r
 
 def compress(string: str) -> str:
     """
