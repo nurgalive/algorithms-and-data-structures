@@ -17,7 +17,7 @@ LeetCode: https://leetcode.com/problems/string-compression
 
 import unittest
 
-class Solution:
+class Solution1:
     """
     Initial LeetCode solution.
     
@@ -49,6 +49,37 @@ class Solution:
                     r += 1
 
         return r
+    
+class Solution2:
+    """
+    Improved LeetCode solution.
+    Used 3 pointer:
+    - write: tracks the last position written in the sequence, used to mark where to write the next 
+      character and result
+    - left: holds the position of characters to compare with the right pointer. Moves to the position
+      of the right pointer after writing the current occurrences
+    - right: moves forward to scan characters, comparing each with the left pointer
+    """
+    def compress(self, chars: list[str]) -> int:
+        l = 0  # left
+        r = 0  # right
+        write = 0  # write pointer and answer
+
+        while l < len(chars):  # iterate until we reach the end
+            
+            while r < len(chars) and chars[l] == chars[r]:
+                r += 1
+
+            chars[write] = chars[l]  # write current char
+            write += 1  # update last written pointer
+
+            if r - l > 1:  # if index difference more than 1, write occurrences
+                for digit in str(r - l):  # converting occurrences into string and iterating over them
+                    chars[write] = digit  # adding occurrences to chars
+                    write += 1  # update last written pointer
+            l = r  # moving the left pointer to the right pointer position
+        
+        return write  # return last written position
 
 def compress(string: str) -> str:
     """
@@ -141,7 +172,7 @@ class TestCompress(unittest.TestCase):
     def test_len_compress(self):
         self.assertEqual(len_compress(""), 0)
         self.assertEqual(len_compress("aabcccccaaa"), 8)
-        self.assertEqual(len_compress("aaaaaaaaaaaa"), 3)
+        self.assertEqual(len_compress("aaaaaaaaaaaa"), 3)     
 
 
 if __name__ == "__main__":
