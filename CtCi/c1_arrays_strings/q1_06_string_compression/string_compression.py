@@ -15,6 +15,7 @@ LeetCode: https://leetcode.com/problems/string-compression
 
 """
 
+from copy import deepcopy
 import unittest
 
 class Solution1:
@@ -32,9 +33,7 @@ class Solution1:
         r = 0
         i = 0
         while i < len(chars):
-            print("l", r)
-            print("r", i)
-            curr_char = chars[r]
+            curr_char = chars[i]
             counter = 0
             while i < len(chars) and curr_char == chars[i]:
                 counter += 1
@@ -174,6 +173,27 @@ class TestCompress(unittest.TestCase):
         self.assertEqual(len_compress("aabcccccaaa"), 8)
         self.assertEqual(len_compress("aaaaaaaaaaaa"), 3)     
 
+class TestLeetCode(unittest.TestCase):
+    cases = [
+        (["a", "a", "b", "b", "c", "c", "c"], ["a","2","b","2","c","3"]),
+        (["a"], ["a"]),
+        (["a", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b"], ["a", "b", "1", "2"]),
+        (["a", "a", "a", "b", "b", "b", "b", "c", "c", "c"], ["a", "3", "b", "4", "c", "3"]),
+        (["a", "b", "c"], ["a", "b", "c"])
+    ]
+    
+    def test_leetcode1(self):
+        for test_chars, expected in self.cases:
+            test_chars = deepcopy(test_chars)
+            with self.subTest(chars=test_chars, expected=expected):
+                self.assertEqual(test_chars[0:Solution1().compress(test_chars)], expected)
+                
+    def test_leetcode2(self):
+        for test_chars, expected in self.cases:
+            test_chars = deepcopy(test_chars)
+            with self.subTest(chars=test_chars, expected=expected):
+                self.assertEqual(test_chars[0:Solution2().compress(test_chars)], expected)
+                
 
 if __name__ == "__main__":
     unittest.main()
