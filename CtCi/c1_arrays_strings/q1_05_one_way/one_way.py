@@ -135,54 +135,36 @@ def one_way_unified(str1: str, str2: str) -> bool:
 
 
 class TestOneWay(unittest.TestCase):
-    def test_one_way(self):
+    cases = [
         # inserts
-        self.assertEqual(one_way_simple("pale", "pales"), True)  # in the end
-        self.assertEqual(one_way_simple("pale", "spale"), True)  # in the beginning
-        self.assertEqual(one_way_simple("pale", "palse"), True)  # in the middle
+        ("pale", "pales", True),  # in the end
+        ("pale", "spale", True), # in the beginning
+        ("pale", "palse", True),  # in the middle
 
         # removes
-        self.assertEqual(one_way_simple("pale", "pal"), True)  # in the end
-        self.assertEqual(one_way_simple("pale", "ale"), True)  # in the beginning
-        self.assertEqual(one_way_simple("pale", "ple"), True)  # in the middle
+        ("pale", "pal", True), # in the end
+        ("pale", "ale", True), # in the beginning
+        ("pale", "ple", True), # in the middle
 
         # replaces
-        self.assertEqual(one_way_simple("pale", "pals"), True)  # in the end
-        self.assertEqual(one_way_simple("pale", "sale"), True)  # in the beginning
-        self.assertEqual(one_way_simple("pale", "pase"), True)  # in the middle
+        ("pale", "pals", True), # in the end
+        ("pale", "sale", True), # in the beginning
+        ("pale", "pase", True) # in the middle
+    ]
+    def test_one_way(self):
+        for str1, str2, expected in self.cases:
+            with self.subTest(str1=str1, str2=str2, expected=expected):
+                self.assertEqual(one_way_simple(str1, str2), expected)
 
     def test_one_way_separate(self):
-        # replaces
-        self.assertEqual(one_way_separate("pale", "pals"), True)  # in the end
-        self.assertEqual(one_way_separate("pale", "sale"), True)  # in the beginning
-        self.assertEqual(one_way_separate("pale", "pase"), True)  # in the middle
-
-        # inserts
-        self.assertEqual(one_way_separate("pale", "pales"), True)  # in the end
-        self.assertEqual(one_way_separate("pale", "spale"), True)  # in the beginning
-        self.assertEqual(one_way_separate("pale", "palse"), True)  # in the middle
-    
-        # removes
-        self.assertEqual(one_way_separate("pale", "pal"), True)  # in the end
-        self.assertEqual(one_way_separate("pale", "ale"), True)  # in the beginning
-        self.assertEqual(one_way_separate("pale", "ple"), True)  # in the middle
+        for str1, str2, expected in self.cases:
+            with self.subTest(str1=str1, str2=str2, expected=expected):
+                self.assertEqual(one_way_separate(str1, str2), expected)
 
     def test_one_way_unified(self):
-        # replaces
-        self.assertEqual(one_way_unified("pale", "pals"), True)  # in the end
-        self.assertEqual(one_way_unified("pale", "sale"), True)  # in the beginning
-        self.assertEqual(one_way_unified("pale", "pase"), True)  # in the middle
-
-        # inserts
-        self.assertEqual(one_way_unified("pale", "pales"), True)  # in the end
-        self.assertEqual(one_way_unified("pale", "spale"), True)  # in the beginning
-        self.assertEqual(one_way_unified("pale", "palse"), True)  # in the middle
-
-        # removes
-        self.assertEqual(one_way_unified("pale", "pal"), True)  # in the end
-        self.assertEqual(one_way_unified("pale", "ale"), True)  # in the beginning
-        self.assertEqual(one_way_unified("pale", "ple"), True)  # in the middle
-
+        for str1, str2, expected in self.cases:
+            with self.subTest(str1=str1, str2=str2, expected=expected):
+                self.assertEqual(one_way_separate(str1, str2), expected)
 
 if __name__ == "__main__":
     # print(one_way("pale", "pales"))
