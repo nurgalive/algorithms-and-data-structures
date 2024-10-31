@@ -130,7 +130,7 @@ def urlify4(text: str, true_len: int) -> str:
     
     text_arr = list(text)
     index = len(text_arr) - 1  # actual last index
-    for i in range(true_len - 1, 1, -1):
+    for i in range(true_len - 1, -1, -1):
         if text_arr[i] == " ":
             text_arr[index] = "0"
             text_arr[index - 1] = "2"
