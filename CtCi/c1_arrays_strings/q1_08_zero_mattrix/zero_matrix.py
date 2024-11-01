@@ -111,15 +111,15 @@ def zero_matrix2(matrix: list[list[int]]) -> list[list[int]]:
                     row_zero = True
 
     # making columns zero
-    for c in range(1, COLS):  # skipting the first col
+    for c in range(1, COLS):  # skipping the first col
         if matrix[0][c] == 0:
-            for r in range(len(matrix)):
+            for r in range(ROWS):
                 matrix[r][c] = 0
     
     # making rows zero
     for r in range(1, ROWS):  # skipping the first row
         if matrix[r][0] == 0:
-            for c in range(len(matrix[0])):
+            for c in range(COLS):
                 matrix[r][c] = 0
 
     # convert first column
