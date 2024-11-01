@@ -7,14 +7,14 @@ Hints:#17, #74, #102
 
 #17. 1.8. If you just cleared the rows and columns as you found Os, you'd likely wind up clearing
 the whole matrix. Try finding the cells with zeros first before making any changes to the
-matrix.
+matrix. [mark first, then alternate]
 
 #74 1.8. Can you use O(N) additional space instead of O(N^2)? What information do you really
-need from the list of cells that are zero?
+need from the list of cells that are zero? [use arrays, instead of copying the matrix]
 
 #102 1.8. You probably need some data storage to maintain a list of the rows and columns that
 need to be zeroed. Can you reduce the additional space usage to 0(1) by using the
-matrix itself for data storage?
+matrix itself for data storage? [use additional var for the first row, and use first col and row for other]
 
 LeetCode - https://leetcode.com/problems/set-matrix-zeroes/description/
 
@@ -85,8 +85,8 @@ def zero_matrix2(matrix: list[list[int]]) -> list[list[int]]:
     Time complexity: O(N^2). Iterate every value in the matrix.
     Space complexity: O(1). Fixed amount for memory. 1 additional var + we use matrix itself.
     
-    It is important in iterators to skip the index [0][0], because otherwise we will get
-    incorrect results.
+    It is important in iterators to skip the index [0][0] when setting rows and cols, 
+    because otherwise we will get incorrect results.
     """
 
     ROWS, COLS = len(matrix), len(matrix[0])
@@ -111,13 +111,13 @@ def zero_matrix2(matrix: list[list[int]]) -> list[list[int]]:
                     row_zero = True
 
     # making columns zero
-    for c in range(1, COLS):
+    for c in range(1, COLS):  # skipting the first col
         if matrix[0][c] == 0:
             for r in range(len(matrix)):
                 matrix[r][c] = 0
     
     # making rows zero
-    for r in range(1, ROWS):
+    for r in range(1, ROWS):  # skipping the first row
         if matrix[r][0] == 0:
             for c in range(len(matrix[0])):
                 matrix[r][c] = 0
