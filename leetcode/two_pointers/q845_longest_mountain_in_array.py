@@ -1,3 +1,34 @@
+"""
+
+LeetCode
+https://leetcode.com/problems/longest-mountain-in-array/
+
+You may recall that an array arr is a mountain array if and only if:
+
+    arr.length >= 3
+    There exists some index i (0-indexed) with 0 < i < arr.length - 1 such that:
+        arr[0] < arr[1] < ... < arr[i - 1] < arr[i]
+        arr[i] > arr[i + 1] > ... > arr[arr.length - 1]
+
+Given an integer array arr, return the length of the longest subarray, which is a mountain. 
+Return 0 if there is no mountain subarray.
+
+Example 1:
+
+Input: arr = [2,1,4,7,3,2,5]
+Output: 5
+Explanation: The largest mountain is [1,4,7,3,2] which has length 5.
+
+Example 2:
+
+Input: arr = [2,2,2]
+Output: 0
+Explanation: There is no mountain.
+
+
+"""
+
+
 # arr: 2,1,4,7,3,2,5
 # l:           ^
 # r:             ^
@@ -5,11 +36,12 @@
 # is decrease?
 class Solution1:
     """
-    TODO: Optimize solution, gives a wrong answer.
-    
+    TODO: Fix bug, gives a wrong answer.
+
     Optimal solution, which is always O(n),
     but harder to implement.
     """
+
     def longestMountain(self, arr: list[int]) -> int:
         if len(arr) < 3:
             return 0
@@ -31,7 +63,7 @@ class Solution1:
                     count = 0
 
                 mount_started = True
-                l +=1
+                l += 1
                 count += 1
             # elif arr[l] > arr[r] and mount_started:
             #     l +=1
@@ -41,38 +73,39 @@ class Solution1:
 
             else:
                 mount_stopped = True
-                l +=1
+                l += 1
                 count += 1
-        
+
         return longest
 
-class Solution2:
-    def longestMountain(self, arr: list[int]) -> int:
-        if len(arr) < 3:
-            return 0
 
-        longest = 0
-        count = 1  # Initialize count to 1 since we start with a single element
-        isIncreasing = True
+# class Solution2:
+#     def longestMountain(self, arr: list[int]) -> int:
+#         if len(arr) < 3:
+#             return 0
 
-        for r in range(1, len(arr)):
-            if arr[r] > arr[r - 1]:
-                isIncreasing = True # We are in the increasing phase of a potential mountain.
-                count += 1
-            elif arr[r] < arr[r - 1]:
-                if isIncreasing:  # Only count as a mountain if we were previously increasing
-                    longest = max(longest, count)
-                isIncreasing = False
-                count += 1
-            else: # arr[r] == arr[r - 1] : Reset
-                isIncreasing = True
-                count = 1
+#         longest = 0
+#         count = 1  # Initialize count to 1 since we start with a single element
+#         isIncreasing = True
 
-        # Check if the last sequence formed a mountain
-        if isIncreasing and count > longest:
-            longest = max(longest, count)
-        
-        return longest
+#         for r in range(1, len(arr)):
+#             if arr[r] > arr[r - 1]:
+#                 isIncreasing = True # We are in the increasing phase of a potential mountain.
+#                 count += 1
+#             elif arr[r] < arr[r - 1]:
+#                 if isIncreasing:  # Only count as a mountain if we were previously increasing
+#                     longest = max(longest, count)
+#                 isIncreasing = False
+#                 count += 1
+#             else: # arr[r] == arr[r - 1] : Reset
+#                 isIncreasing = True
+#                 count = 1
+
+#         # Check if the last sequence formed a mountain
+#         if isIncreasing and count > longest:
+#             longest = max(longest, count)
+
+#         return longest
 
 
 class Solution3:
@@ -80,15 +113,16 @@ class Solution3:
     Suboptimal solution, which is easy to understand and implement.
     We iterate over array, until we find a peak.
     Then start two-pointers in the left and in the right directions from the peak.
-    
+
     Time complexity: average O(N), but worst case O(N^2)
     Example of of worst case:
     [1, 2, 1, 2, 1, 2, 1]
     In this case we will have to iterate two times over the array.
-    
+
     Space complexity: O(1)
-    
+
     """
+
     def longestMountain(self, arr: list[int]) -> int:
         if len(arr) < 3:
             return 0
@@ -116,11 +150,12 @@ class Solution3:
 
                 # move i to the end of the current mountain to skip redundant checks
                 i = r
-        
+
         return longest
 
-arr1 = [2,1,4,7,3,2,5]
-arr2 = [0,1,2,3,4,5,4,3,2,1,0]
+
+arr1 = [2, 1, 4, 7, 3, 2, 5]
+arr2 = [0, 1, 2, 3, 4, 5, 4, 3, 2, 1, 0]
 arr3 = [2, 2, 2]
 print(Solution3().longestMountain(arr1))
 # print(Solution3().longestMountain(arr2))
