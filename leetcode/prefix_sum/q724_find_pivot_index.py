@@ -45,10 +45,10 @@ Return index.
 """
 
 
-class Solution:
+class Solution1:
     """
     Brute force solution.
-    Time: (O^2)
+    Time: O(N^2)
     Space: O(1)
     """
 
@@ -59,7 +59,6 @@ class Solution:
         if len(nums) == 1:
             return 0
 
-        right_sum = 0
         left_sum = 0
         for i in range(len(nums)):
             right_sum = 0
@@ -70,8 +69,37 @@ class Solution:
             left_sum += nums[i]
         return -1
 
-assert Solution().pivotIndex([]) == -1
-assert Solution().pivotIndex([1]) == 0
-assert Solution().pivotIndex([1, 0]) == 0
-assert Solution().pivotIndex([1, 0, 1]) == 1
-print(Solution().pivotIndex([1, 0]))
+
+class Solution2:
+    """
+    Optimal solution using prefix sum.
+    We calculate sum once - O(N)
+    Then iterate over array and we calculate left sum and subtract it from total.
+    And compare it.
+    Time: O(N)
+    Space: O(1)
+    """
+
+    def pivotIndex(self, nums: list[int]) -> int:
+        total = sum(nums)  # O(n)
+
+        left_sum = 0
+        for i, ival in enumerate(nums):
+            right_sum = total - left_sum - ival
+            if left_sum == right_sum:
+                return i
+            left_sum += ival
+        return -1
+
+
+# experimenting with the assert based simple tests
+
+assert Solution1().pivotIndex([]) == -1
+assert Solution1().pivotIndex([1]) == 0
+assert Solution1().pivotIndex([1, 0]) == 0
+assert Solution1().pivotIndex([1, 0, 1]) == 1
+
+assert Solution2().pivotIndex([]) == -1
+assert Solution2().pivotIndex([1]) == 0
+assert Solution2().pivotIndex([1, 0]) == 0
+assert Solution2().pivotIndex([1, 0, 1]) == 1
