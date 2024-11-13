@@ -25,8 +25,7 @@ class Solution1:
     Brute force solution.
     Tries every possible subarray.
     Time complexity: O(N^2)
-    Space comlexity: O(1)
-
+    Space complexity: O(1)
     """
 
     def subarraySum(self, nums: list[int], k: int) -> int:
