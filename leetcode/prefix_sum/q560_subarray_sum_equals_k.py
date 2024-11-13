@@ -26,8 +26,9 @@ class Solution1:
     Tries every possible subarray.
     Time complexity: O(N^2)
     Space comlexity: O(1)
-    
+
     """
+
     def subarraySum(self, nums: list[int], k: int) -> int:
         result = 0
         for nleft in range(len(nums)):
@@ -38,29 +39,32 @@ class Solution1:
                     result += 1
         return result
 
+
 class Solution2:
     """
     Optimal solution.
     Time complexity: O(N)
     Space complexity: O(N)
-    
+
     This solutions uses very clever trick.
     It stores prefix sums (cumulative sums) frequencies in the hashmap.
     It iterates over array, keep the current sum. If current sum - k exists in the hashmap,
     it means there are subarrays with sum k.
     """
+
     def subarraySum(self, nums: list[int], k: int) -> int:
         result = 0
         prefix_dict = {0: 1}
-        
+
         prefix_sum = 0
         for num in nums:
             prefix_sum += num
             result += prefix_dict.get(prefix_sum - k, 0)
             prefix_dict[prefix_sum] = prefix_dict.get(prefix_sum, 0) + 1
-                
+
         print(prefix_dict)
         return result
+
 
 nums1 = [1, 1, 1]
 nums2 = [1, -1, 1, 1, 1, 1]
