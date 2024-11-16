@@ -49,11 +49,16 @@ class Solution2:
     It stores prefix sums (cumulative sums) frequencies in the hashmap.
     It iterates over array, keep the current sum. If current sum - k exists in the hashmap,
     it means there are subarrays with sum k.
+    
+    If the cumulative sum up to index j is sum_j and the cumulative sum up to index i is sum_i, 
+    then the sum of elements between indices i and j is sum_j - sum_i. If sum_j - sum_i = k, 
+    then the subarray between indices i and j sums to k.
     """
 
     def subarraySum(self, nums: list[int], k: int) -> int:
         result = 0
-        prefix_dict = {0: 1}
+        # cumsum: freq
+        prefix_dict = {0: 1}  # initialize with {0: 1} to handle the case when current_sum == k
 
         prefix_sum = 0
         for num in nums:
