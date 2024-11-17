@@ -1,4 +1,19 @@
-def build_prefix_sum(arr):
+"""
+Prefix sum also called cumulative sum is a technique for quickly solving range (subarray) questions.
+0-based prefix sum is preferred, because it makes code easier and cleaner.
+Array               = [2, 3, 1, 4]
+Prefix sum array    = [0, 2, 5, 6, 10] 
+
+With negative numbers
+Array               = [1, 2, -3, 5]
+Prefix sum array    = [0, 1, 3, 0, 5]
+
+Formula to get the range sum of the subarray depends of the approach/
+
+"""
+
+
+def build_prefix_sum_1_based(arr):
     n = len(arr)
     prefix_sum = [0] * n
     prefix_sum[0] = arr[0]
@@ -8,17 +23,7 @@ def build_prefix_sum(arr):
     
     return prefix_sum
 
-def range_sum(prefix_sum, l, r):
-    if l == 0:
-        return prefix_sum[r]
-    else:
-        return prefix_sum[r] - prefix_sum[l - 1]
-    
-def range_sum2(prefix_sum, l, r):
-    return prefix_sum[r + 1] - prefix_sum[l]
-    
-
-def build_prefix_sum2(arr):
+def build_prefix_sum_0_based(arr):
     n = len(arr)
     prefix_sum = [0] * (n + 1)
     
@@ -26,6 +31,27 @@ def build_prefix_sum2(arr):
         prefix_sum[i + 1] = prefix_sum[i] + arr[i]
     
     return prefix_sum
+
+def range_sum_1_based(prefix_sum, l, r):
+    """
+    l - left pointer
+    r - right pointer
+    Prefix sum array has the same length, at the original array.
+    Find range sum formula: prefix_sum[r] - prefix_sum[l -1]
+    """
+    if l == 0:
+        return prefix_sum[r]
+    else:
+        return prefix_sum[r] - prefix_sum[l - 1]
+    
+def range_sum2(prefix_sum, l, r):
+    """
+    l - left pointer
+    r - right pointer
+    Prefix sum array has length n + 1.
+    Formula for the range queries: prefix_sum[r + 1] - prefix_sum[l]
+    """
+    return prefix_sum[r + 1] - prefix_sum[l]
 
 def subarraySum(nums: list[int], k: int) -> int:
     cumsum = 0
@@ -46,7 +72,7 @@ arr = [1, -1, 1, -1, 1, 1]
 
 k = 1
 print(arr)
-print(build_prefix_sum2(arr))
+print(build_prefix_sum_0_based(arr))
 print(subarraySum(arr, k))
 
 # Example usage
