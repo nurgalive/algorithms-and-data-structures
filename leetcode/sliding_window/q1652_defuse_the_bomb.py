@@ -33,6 +33,9 @@ Constraints:
     1 <= code[i] <= 100
     -(n - 1) <= k <= n - 1
 
+Explanation
+https://www.youtube.com/watch?v=c4oOIi5YTE4
+
 My comments:
 This task requires good understanding of the math and how to make the iterating over loop circular.
 """
