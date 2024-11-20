@@ -48,7 +48,7 @@ class Solution1:
     Key difficulty for is to implement proper circulation.
     Time: O(n * |k|). Two loops, one over n and second in size k.
     Space: O(n). Storing the same sized array for the answer.
-    
+
     This solution is influences by the editorials.
     """
 
@@ -65,10 +65,11 @@ class Solution1:
                         res[i] += code[j + len(code) % len(code)]
         return res
 
+
 class Solution2:
     """
     Cleaner solution influenced by NeetCode.
-    
+
     Trick with the modulo division.
     0 % 4 = 0
     2 % 4 = 2
@@ -76,12 +77,13 @@ class Solution2:
     5 % 4 = 1
     Using mod we make the array circular for the second for loop (j)
     """
+
     def decrypt(self, code: list[int], k: int) -> list[int]:
         n = len(code)
         res = [0] * n  # creating resulting array in size of input
-        
+
         # no need to handle 0 case, it will be handled automatically
-        # if k == 0:  
+        # if k == 0:
         #     return res
 
         for i in range(n):
