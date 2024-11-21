@@ -95,3 +95,34 @@ class Solution2:
                     res[i] += code[j % n]  # we always stay within index n
 
         return res
+
+
+class Solution3:
+    """
+    Optimal solution using sliding window and cumsum (prefix sum).
+    k - is the window size.
+    We calculate the sum once of the size of k.
+    Then we just move the window and subtract one edge of the window and
+    add another one.
+    Only we need to use the trick to make the array circular.
+    """
+
+    def decrypt(self, code: list[int], k: int) -> list[int]:
+        n = len(code)
+        res = [0] * n
+
+        cur_sum = 0
+        l = 0
+        for r in range(n):
+            cur_sum += code[r % n]  # always use mod, because can be out of bounds
+            if r - l + 1 > k:
+                cur_sum -= code[]
+
+            # if k > 0:
+            #     for j in range(i + 1, i + k + 1):  # iterating forward
+            #         res[i] += code[j % n]  # modulo division trick used here
+            # elif k < 0:
+            #     for j in range(i - 1, i - 1 - abs(k), -1):  # iterating backwards
+            #         res[i] += code[j % n]  # we always stay within index n
+
+        return res
