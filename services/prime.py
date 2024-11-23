@@ -1,7 +1,17 @@
-# Cracking the coding interview, page 50, exercise 10
+"""
+Cracking the coding interview, page 50, exercise 10 & page 117
 
-# This scripts calculates the prime number.
-# Prime number is a number, which is bigger than and divided only by 1 and by itself.
+This scripts calculates the prime number.
+Prime number is a number, which is bigger than and divided only by 1 and by itself.
+
+Important trick to use search only up to sqrt(n) (guess * guess <= n)
+
+More examples
+https://realpython.com/python-modulo-operator/#how-to-determine-if-a-number-is-a-prime-number
+
+Sieve of Eratosthenes and Sieve of Atkin for examples of more performant algorithms for finding prime numbers.
+"""
+
 
 import time
 
