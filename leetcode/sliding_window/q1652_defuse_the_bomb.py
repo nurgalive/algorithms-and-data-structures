@@ -113,14 +113,14 @@ class Solution3:
 
         cur_sum = 0
         l = 0
-        for r in range(n):
+        for r in range(n + abs(k)):  # we have to add k, because of the window size
             cur_sum += code[r % n]  # always use mod, because can be out of bounds
             
-            if r - l + 1 > k:  # check the current window size
+            if r - l + 1 > abs(k):  # check the current window size
                 cur_sum -= code[l % n]
                 l = l + 1 % n
             
-            if r - l + 1 == k:
+            if r - l + 1 == abs(k):
                 if k > 0:
                     res[(l - 1) % n] = cur_sum 
                 elif k < 0:
@@ -130,6 +130,6 @@ class Solution3:
 
 code1 = ([5,7,1,4], 3)  # [12,10,16,13]
 code2 = ([1,2,3,4], 0)  # [0,0,0,0]
-code2 = ([2,4,9,3], -2)  # [12,5,6,13]
+code3 = ([2,4,9,3], -2)  # [12,5,6,13]
 
-print(Solution3().decrypt(code1[0], code1[1]))
+print(Solution3().decrypt(code3[0], code3[1]))
