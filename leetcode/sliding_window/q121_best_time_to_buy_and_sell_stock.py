@@ -28,4 +28,20 @@ https://www.youtube.com/watch?v=1pkOgXD63yU
 
 class Solution:
     def maxProfit(self, prices: list[int]) -> int:
-        pass
+        buy = 0  # buy low
+        #sell = 1  # sell high
+        max_profit = 0
+
+        for sell in range(1, len(prices)):
+            if prices[buy] > prices[sell]:
+                buy = sell
+            else:
+                profit = prices[sell] - prices[buy]
+                max_profit = max(max_profit, profit)
+                sell += 1
+        
+        return max_profit
+
+
+prices = [7,1,5,3,6,4]
+print(Solution().maxProfit(prices))
