@@ -27,13 +27,19 @@ https://www.youtube.com/watch?v=1pkOgXD63yU
 
 
 class Solution:
+    """
+    Optimal solution, using sliding window, two pointe approach.
+    Time complexity: O(N)
+    Space complexity: O(1)
+    Buy low - Sell high.
+    """
     def maxProfit(self, prices: list[int]) -> int:
-        buy = 0  # buy low
-        # sell = 1  # sell high
+        buy = 0  # buy pointer
         max_profit = 0
 
         for sell in range(1, len(prices)):
-            if prices[buy] > prices[sell]:
+            # if buy price is higher than sell, we move sell pointer to buy position
+            if prices[buy] > prices[sell]: 
                 buy = sell
             else:
                 profit = prices[sell] - prices[buy]
