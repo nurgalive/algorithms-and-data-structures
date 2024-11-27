@@ -52,13 +52,13 @@ class Solution1:
     """
     Put here my initial not working solution as a reference.
     It return wrong answer, because comparison happens one index late.
-    Another important point, that the first element 
+    Another important point, that the first element
     """
-    
+
     #         1,1,2
     # input:  0,1,2,3,1,2,2,3,3,4]
     # write:    ^
-    # i:          ^    
+    # i:          ^
     # cur_num = 1
     def removeDuplicates(self, nums: list[int]) -> int:
         write = 0
@@ -71,3 +71,43 @@ class Solution1:
                 write += 1
 
         return write
+
+
+class Solution2:
+    """
+    My improved solution.
+    It was important to start write from index 1.
+    In other words, I was writing in the index 0,
+    which was needed to ignore.
+    """
+
+    def removeDuplicates(self, nums: list[int]) -> int:
+        write = 1
+        cur_num = nums[0]  # by the description, min len is 1
+
+        for i in range(1, len(nums)):
+            if nums[i] != cur_num:
+                nums[write] = nums[i]
+                cur_num = nums[i]
+                write += 1
+
+        return write
+
+
+class Solution3:
+    """
+    Solution by NeetCode.
+    """
+
+    def removeDuplicates(self, nums: list[int]) -> int:
+        write = 1
+
+        for i in range(1, len(nums)):
+            if nums[i] != nums[i - 1]:
+                nums[write] = nums[i]
+                write += 1
+
+        return write
+
+print(Solution2().removeDuplicates([0,0,1,1,1,2,2,3,3,4]))
+assert Solution2().removeDuplicates([0,0,1,1,1,2,2,3,3,4]) == 5
