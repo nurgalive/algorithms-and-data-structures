@@ -65,7 +65,7 @@ class Solution:
         write = 0
         for r in range(0, len(nums)):
             if nums[r] != val:
-                nums[write], nums[r] = nums[r], nums[write]
+                nums[write] = nums[r]
                 write += 1
         
         return write
